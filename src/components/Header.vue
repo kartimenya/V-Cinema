@@ -3,17 +3,17 @@
   <header>
     <div class="container header-container">
       <div class="row">
-        <a class="logo" href="">logo</a>
+        <router-link class="logo" to="/">V-Cinema</router-link>
         <nav class="nav">
           <ul class="nav-list">
             <li class="nav-item">
-              <a href="">Фильмы</a>
+              <router-link to="/">Фильмы</router-link>
             </li>
             <li class="nav-item">
-              <a href="">Сериалы</a>
+              <router-link to="/series">Сериалы</router-link>
             </li>
             <li class="nav-item">
-              <a href="">Мультфильмы</a>
+              <router-link to="/cartoons">Мультфильмы</router-link>
             </li>
           </ul>
         </nav>
