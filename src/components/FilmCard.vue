@@ -18,21 +18,19 @@ function formatDuration(value: number) {
 </script>
 
 <template>
-  <router-link to="/">
-    <div class="film-card">
-      <div class="film-card__img-box">
-        <img class="film-card__img" :src="movie.poster.previewUrl" alt="" />
-      </div>
-      <div class="film-card__content">
-        <span class="film-card__rating">{{ movie.rating.imdb }}</span>
-        <h3 class="film-card__name">{{ movie.name }}</h3>
-        <div class="film-card__info">
-          <span class="film-card__year">{{ movie.year }}</span>
-          <span class="film-card__length">{{ formatDuration(movie.movieLength) }}</span>
-        </div>
+  <div @click="$router.push(`films/${movie.id}`)" class="film-card">
+    <div class="film-card__img-box">
+      <img class="film-card__img" :src="movie.poster.previewUrl" alt="" />
+    </div>
+    <div class="film-card__content">
+      <span class="film-card__rating">{{ movie.rating.imdb }}</span>
+      <h3 class="film-card__name">{{ movie.name }}</h3>
+      <div class="film-card__info">
+        <span class="film-card__year">{{ movie.year }}</span>
+        <span class="film-card__length">{{ formatDuration(movie.movieLength) }}</span>
       </div>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <style>
@@ -44,6 +42,7 @@ function formatDuration(value: number) {
   outline: none;
   color: #fff;
   transition: transform 0.3s;
+  cursor: pointer;
 }
 .film-card:hover .film-card__content {
   opacity: 1;

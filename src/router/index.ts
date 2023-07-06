@@ -23,8 +23,8 @@ const router = createRouter({
       component: CartoonPage,
     },
     {
-      path: '/film:id',
-      name: 'film',
+      path: '/films/:id',
+      name: 'films',
       component: FilmPage,
     },
   ],
