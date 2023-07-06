@@ -4,7 +4,7 @@ import { useMovieStore } from '@/stores/MovieStore';
 import Layout from '@/components/Layout.vue';
 
 const movieStore = useMovieStore();
-movieStore.getMovies();
+movieStore.getMovies('movie');
 </script>
 
 <template>

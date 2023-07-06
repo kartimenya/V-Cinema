@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import FilmCard from '@/components/FilmCard.vue';
 import { useMovieStore } from '@/stores/MovieStore';
+import Layout from '@/components/Layout.vue';
 
-const { movies } = useMovieStore();
+const movieStore = useMovieStore();
+movieStore.getMovies('movie');
 </script>
 
 <template>
-  <section>
-    <h1>Фильмы</h1>
-    <div class="films">
-      <FilmCard v-for="movie in movies" :key="movie.imdbId" :movie="movie" />
-    </div>
-  </section>
+  <Layout>
+    <section>
+      <h1 class="title" @click="movieStore.getMovies">Фильмы</h1>
+      <div v-if="!movieStore.isLoading" class="films">
+        <FilmCard v-for="movie in movieStore.movies" :key="movie.id" :movie="movie" />
+      </div>
+      <div v-else>загрузка</div>
+    </section>
+  </Layout>
 </template>
 
 <style>
@@ -20,5 +25,8 @@ const { movies } = useMovieStore();
   grid-gap: 20px;
   gap: 20px;
   grid-template-columns: repeat(6, 1fr);
+}
+.title {
+  margin-bottom: 10px;
 }
 </style>
