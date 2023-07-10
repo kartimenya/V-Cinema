@@ -1,10 +1,6 @@
 <script setup lang="ts">
+import type { IOption } from '@/models/selectOption';
 import { ref, type PropType, watch } from 'vue';
-
-interface IOption {
-  name: string;
-  value: string;
-}
 
 const props = defineProps({
   options: {
@@ -99,3 +95,4 @@ const changeOption = (e: Event, option: IOption) => {
   background: #3d3d43;
 }
 </style>
+@/models/selectOption
