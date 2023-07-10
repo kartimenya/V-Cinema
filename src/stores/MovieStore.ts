@@ -8,11 +8,13 @@ export const useMovieStore = defineStore('movieStore', {
     isLoading: false,
   }),
   actions: {
-    async getMovies(type: string) {
+    async getMovies(type: string, genre?: string) {
       try {
         this.isLoading = true;
         const { data } = await axios.get(
-          `https://api.kinopoisk.dev/v1.3/movie?type=${type}&limit=42`,
+          `https://api.kinopoisk.dev/v1.3/movie?type=${type}&limit=42&${
+            genre ? 'genres.name=' + genre : ''
+          }`,
           {
             headers: {
               'X-API-KEY': 'AV16W7K-PQ0436M-H7WH58W-7EQ1W7E',
