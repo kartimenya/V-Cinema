@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <header>
+  <header class="header">
     <div class="container header-container">
       <div class="row">
         <router-link class="logo" to="/">V-Cinema</router-link>
@@ -23,6 +23,15 @@
   </header>
 </template>
 <style scoped>
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #000;
+  transition: 0.3s;
+}
 .header-container {
   display: flex;
   align-items: center;

@@ -8,9 +8,9 @@ movieStore.getMovies('tv-series');
 </script>
 
 <template>
-  <Layout>
+  <Layout :container="true">
     <section>
-      <h1 class="title" @click="movieStore.getMovies">Сериалы</h1>
+      <h1 class="title">Сериалы</h1>
       <div v-if="!movieStore.isLoading" class="films">
         <FilmCard v-for="movie in movieStore.movies" :key="movie.id" :movie="movie" />
       </div>
