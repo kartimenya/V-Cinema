@@ -1,25 +1,31 @@
 <script setup lang="ts">
 import FilmCard from '@/components/FilmCard.vue';
 import MySelect from '@/components/UI/MySelect.vue';
-import { genresFilters } from '@/constans/filter';
+import { genresFilters, ratingsFilters } from '@/constans/filter';
 import { useMovieStore } from '@/stores/MovieStore';
 import Layout from '@/components/Layout.vue';
 import { ref, watch } from 'vue';
 
 const movieStore = useMovieStore();
 const genreSort = ref('');
+const ratingSort = ref('');
 
 movieStore.getMovies('movie');
 
-watch(genreSort, () => {
-  movieStore.getMovies('movie', genreSort.value);
+watch([genreSort, ratingSort], () => {
+  movieStore.getMovies('movie', genreSort.value, ratingSort.value);
 });
+
+const intersect = () => {
+  movieStore.getMoreMovies('movie', genreSort.value, ratingSort.value);
+};
 </script>
 
 <template>
   <Layout :container="true">
     <div class="filters">
       <MySelect v-model="genreSort" :options="genresFilters" placeholder="Жанры" />
+      <MySelect v-model="ratingSort" :options="ratingsFilters" placeholder="Рейтиг" />
     </div>
     <section>
       <h1 class="title">Фильмы</h1>
@@ -27,6 +33,7 @@ watch(genreSort, () => {
         <FilmCard v-for="movie in movieStore.movies" :key="movie.id" :movie="movie" />
       </div>
       <div v-else>загрузка</div>
+      <div v-intersection="intersect" class="observer"></div>
     </section>
   </Layout>
 </template>
@@ -45,5 +52,8 @@ watch(genreSort, () => {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+}
+.observer {
+  height: 60px;
 }
 </style>

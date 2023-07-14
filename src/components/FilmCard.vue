@@ -20,7 +20,7 @@ function formatDuration(value: number) {
 <template>
   <div @click="$router.push(`films/${movie.id}`)" class="film-card">
     <div class="film-card__img-box">
-      <img class="film-card__img" :src="movie.poster.previewUrl" alt="" />
+      <img class="film-card__img" :src="movie.poster?.previewUrl" alt="" />
     </div>
     <div class="film-card__content">
       <span class="film-card__rating">{{ movie.rating.imdb }}</span>
