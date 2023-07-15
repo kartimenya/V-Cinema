@@ -33,48 +33,46 @@ const actors = computed(() => {
 </script>
 
 <template>
-  <Layout>
-    <section v-if="movie" class="section">
-      <div class="heigh"></div>
-      <div class="movie-bg" :style="{ backgroundImage: 'url(' + movie.backdrop.url + ')' }"></div>
-      <div class="container">
-        <div class="content">
-          <div class="movie-logo">
-            <div class="movie-logo__box">
-              <img :src="movie.logo.url" alt="" />
-            </div>
+  <section v-if="movie" class="section">
+    <div class="heigh"></div>
+    <div class="movie-bg" :style="{ backgroundImage: 'url(' + movie.backdrop.url + ')' }"></div>
+    <div class="container">
+      <div class="content">
+        <div class="movie-logo">
+          <div class="movie-logo__box">
+            <img :src="movie.logo.url" alt="" />
           </div>
-          <div class="movie-characteristics">
-            <span>{{ movie.rating.imdb }}</span>
-            <span>{{ movie.year }}</span>
-            <span>{{ movie.genres[0].name }}</span>
-            <span>{{ movie.ageRating }}+</span>
-            <span>{{ movie.countries[0].name }}</span>
-            <span>{{ movie.movieLength }} мин</span>
+        </div>
+        <div class="movie-characteristics">
+          <span>{{ movie.rating.imdb }}</span>
+          <span>{{ movie.year }}</span>
+          <span>{{ movie.genres[0].name }}</span>
+          <span>{{ movie.ageRating }}+</span>
+          <span>{{ movie.countries[0].name }}</span>
+          <span>{{ movie.movieLength }} мин</span>
+        </div>
+        <p class="movie-desc">
+          {{ movie.shortDescription }}
+        </p>
+        <div class="movie-participants">
+          <div class="movie-participants__row">
+            <span class="movie-participants__lable">Режиссёр:</span>
+            <ul class="movie-participants__list">
+              <li v-for="director in directors" class="movie-participants__item">
+                {{ director.name }}
+              </li>
+            </ul>
           </div>
-          <p class="movie-desc">
-            {{ movie.shortDescription }}
-          </p>
-          <div class="movie-participants">
-            <div class="movie-participants__row">
-              <span class="movie-participants__lable">Режиссёр:</span>
-              <ul class="movie-participants__list">
-                <li v-for="director in directors" class="movie-participants__item">
-                  {{ director.name }}
-                </li>
-              </ul>
-            </div>
-            <div class="movie-participants__row">
-              <span class="movie-participants__lable">Актеры:</span>
-              <ul class="movie-participants__list">
-                <li v-for="actor in actors" class="movie-participants__item">{{ actor.name }}</li>
-              </ul>
-            </div>
+          <div class="movie-participants__row">
+            <span class="movie-participants__lable">Актеры:</span>
+            <ul class="movie-participants__list">
+              <li v-for="actor in actors" class="movie-participants__item">{{ actor.name }}</li>
+            </ul>
           </div>
         </div>
       </div>
-    </section>
-  </Layout>
+    </div>
+  </section>
 </template>
 
 <style scoped>

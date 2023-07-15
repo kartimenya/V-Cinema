@@ -3,7 +3,6 @@ import FilmCard from '@/components/FilmCard.vue';
 import MySelect from '@/components/UI/MySelect.vue';
 import { genresFilters, ratingsFilters } from '@/constans/filter';
 import { useMovieStore } from '@/stores/MovieStore';
-import Layout from '@/components/Layout.vue';
 import { ref, watch } from 'vue';
 
 const movieStore = useMovieStore();
@@ -22,7 +21,7 @@ const intersect = () => {
 </script>
 
 <template>
-  <Layout :container="true">
+  <div class="container">
     <div class="filters">
       <MySelect v-model="genreSort" :options="genresFilters" placeholder="Жанры" />
       <MySelect v-model="ratingSort" :options="ratingsFilters" placeholder="Рейтиг" />
@@ -35,7 +34,7 @@ const intersect = () => {
       <div v-else>загрузка</div>
       <div v-intersection="intersect" class="observer"></div>
     </section>
-  </Layout>
+  </div>
 </template>
 
 <style>

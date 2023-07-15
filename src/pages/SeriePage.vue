@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import FilmCard from '@/components/FilmCard.vue';
 import { useMovieStore } from '@/stores/MovieStore';
-import Layout from '@/components/Layout.vue';
 
 const movieStore = useMovieStore();
 movieStore.getMovies('tv-series');
 </script>
 
 <template>
-  <Layout :container="true">
+  <div class="container">
     <section>
       <h1 class="title">Сериалы</h1>
       <div v-if="!movieStore.isLoading" class="films">
@@ -16,7 +15,7 @@ movieStore.getMovies('tv-series');
       </div>
       <div v-else>загрузка</div>
     </section>
-  </Layout>
+  </div>
 </template>
 
 <style>

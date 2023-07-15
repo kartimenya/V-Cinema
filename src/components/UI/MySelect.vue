@@ -26,10 +26,14 @@ const changeOption = (e: Event, option: IOption) => {
   headText.value = option.name;
   emit('update:modelValue', option.value);
 };
+
+const clickOutside = () => {
+  isOpen.value = false;
+};
 </script>
 
 <template>
-  <div class="select" :class="{ open: isOpen }">
+  <div v-click-outside="clickOutside" class="select" :class="{ open: isOpen }">
     <div class="select-top" @click="isOpen = !isOpen">{{ headText ?? placeholder }}</div>
     <div class="select-options" v-if="isOpen">
       <div
