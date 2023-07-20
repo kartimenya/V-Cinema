@@ -16,15 +16,17 @@ export const useMovieStore = defineStore('movieStore', {
     isLoading: false,
     focusPage: 4,
     pages: 5,
+    genreSort: '',
+    ratingSort: '',
   }),
   actions: {
-    async getMovies(type: string, genre?: string, rating?: string) {
+    async getMovies(type: string) {
       try {
         this.isLoading = true;
         const { data } = await axios.get<GetMoviesResponse>(
           `https://api.kinopoisk.dev/v1.3/movie?type=${type}&${
-            rating ? 'rating.imdb=' + rating : ''
-          }&${genre ? 'genres.name=' + genre : ''}&limit=42`,
+            this.ratingSort ? 'rating.imdb=' + this.ratingSort : ''
+          }&${this.genreSort ? 'genres.name=' + this.genreSort : ''}&limit=42`,
           {
             headers: {
               'X-API-KEY': 'AV16W7K-PQ0436M-H7WH58W-7EQ1W7E',
@@ -38,13 +40,15 @@ export const useMovieStore = defineStore('movieStore', {
         this.isLoading = false;
       }
     },
-    async getMoreMovies(type: string, genre?: string, rating?: string) {
+    async getMoreMovies(type: string) {
       if (this.focusPage < this.pages) {
         try {
           const { data } = await axios.get<GetMoviesResponse>(
             `https://api.kinopoisk.dev/v1.3/movie?type=${type}&${
-              rating ? 'rating.imdb=' + rating : ''
-            }&${genre ? 'genres.name=' + genre : ''}&limit=18&page=${this.focusPage}`,
+              this.ratingSort ? 'rating.imdb=' + this.ratingSort : ''
+            }&${this.genreSort ? 'genres.name=' + this.genreSort : ''}&limit=18&page=${
+              this.focusPage
+            }`,
             {
               headers: {
                 'X-API-KEY': 'AV16W7K-PQ0436M-H7WH58W-7EQ1W7E',

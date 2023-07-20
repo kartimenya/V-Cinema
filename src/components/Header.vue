@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useMovieStore } from '@/stores/MovieStore';
 
 const router = useRouter();
 const activeItem = ref('Фильмы');
+
+const movieStore = useMovieStore();
 
 const menuItems = [
   { url: '/', name: 'Фильмы' },
@@ -12,6 +15,8 @@ const menuItems = [
 ];
 
 const changePage = (e: any, url: string, name: string) => {
+  movieStore.genreSort = '';
+  movieStore.ratingSort = '';
   activeItem.value = name;
   router.push(url);
 };

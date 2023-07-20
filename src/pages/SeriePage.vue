@@ -1,19 +1,27 @@
 <script setup lang="ts">
 import FilmCard from '@/components/FilmCard.vue';
+import MovieFilters from '@/components/MovieFilters.vue';
 import { useMovieStore } from '@/stores/MovieStore';
 
 const movieStore = useMovieStore();
+
 movieStore.getMovies('tv-series');
+
+const intersect = () => {
+  movieStore.getMoreMovies('tv-series');
+};
 </script>
 
 <template>
   <div class="container">
     <section>
-      <h1 class="title">Сериалы</h1>
+      <h1 class="title">Фильмы</h1>
+      <MovieFilters :film-type="'tv-series'" />
       <div v-if="!movieStore.isLoading" class="films">
         <FilmCard v-for="movie in movieStore.movies" :key="movie.id" :movie="movie" />
       </div>
       <div v-else>загрузка</div>
+      <div v-intersection="intersect" class="observer"></div>
     </section>
   </div>
 </template>
@@ -27,5 +35,8 @@ movieStore.getMovies('tv-series');
 }
 .title {
   margin-bottom: 10px;
+}
+.observer {
+  height: 60px;
 }
 </style>
